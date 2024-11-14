@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analisis Perhitungan</title>
+</head>
+<body>
+    <h1>Hasil Analisis Dokumen</h1>
+    
+    <h2>Dokumen 1:</h2>
+    <p>{{ document.doc1 }}</p>
+    
+    <h2>Dokumen 2:</h2>
+    <p>{{ document.doc2 }}</p>
+    
+    <h2>Hasil Preprocessing:</h2>
+    {% for preprocessing in preprocessing_steps %}
+        <h3>Dokumen {{ forloop.counter }}:</h3>
+        <p><strong>Case Folding:</strong> {{ preprocessing.case_folding }}</p>
+        <p><strong>Cleaning:</strong> {{ preprocessing.cleaning }}</p>
+        <p><strong>Tokenizing:</strong> {{ preprocessing.tokenizing }}</p>
+        <p><strong>Stopwords Removal:</strong> {{ preprocessing.stopwords_removal }}</p>
+        <p><strong>Stemming:</strong> {{ preprocessing.stemming }}</p>
+    {% endfor %}
+    
+    <h2>Hasil Perbandingan (Cosine Similarity):</h2>
+    <p><strong>Similarity Score:</strong> {{ comparison_result.similarity_score }}%</p>
+</body>
+</html>

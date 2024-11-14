@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kemiripan Dokumen - Cosine Similarity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        textarea {
+            width: 98%;
+            height: 150px;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kemiripan Dokumen - Cosine Similarity</h1>
+        
+        <form id="similarityForm" action="{% url 'calculate_similarity' %}" method="post">
+            {% csrf_token %}
+
+            <label for="document1">Dokumen 1:</label>
+            <textarea id="document1" name="document1" placeholder="Masukkan teks dokumen pertama di sini..." required></textarea>
+
+            <label for="document2">Dokumen 2:</label>
+            <textarea id="document2" name="document2" placeholder="Masukkan teks dokumen kedua di sini..." required></textarea>
+
+            <button type="submit">Hitung Kemiripan</button>
+        </form>
+
+        <!-- Tempat untuk menampilkan hasil kemiripan -->
+        {% if similarity_score %}
+            <div class="result" id="similarityResult">
+                Kemiripan antara kedua dokumen adalah: {{ similarity_score|floatformat:2 }}%
+
+            </div>
+        
+            <h2>Dokumen 1:</h2>
+            <p>{{ highlighted_doc1|safe }}</p>
+        
+            <h2>Dokumen 2:</h2>
+            <p>{{ highlighted_doc2|safe }}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
